@@ -1,131 +1,34 @@
+/*
+  Copyright 2018 Google LLC
 
-import React, { useState } from "react";
-import ReactDOM from "react-dom/client";
-import "./style.css";
-
-function App() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("hotelUser") || "null")
-  );
-  const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  async function handleLogin(event) {
-    event.preventDefault();
-    setMessage("");
-    setLoading(true);
-
-    try {
-      const response = await fetch(
-        "http://localhost:5000/api/auth/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Login failed");
-      }
-
-      if (!data.user) {
-        throw new Error("User data not received from server");
-      }
-
-      localStorage.setItem("hotelUser", JSON.stringify(data.user));
-      setUser(data.user);
-    } catch (error) {
-      setMessage(
-        error.message === "Failed to fetch"
-          ? "Backend start karein aur CORS check karein."
-          : error.message
-      );
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  function handleLogout() {
-    localStorage.removeItem("hotelUser");
-    setUser(null);
-    setEmail("");
-    setPassword("");
-    setMessage("");
-  }
-
-  if (user) {
-    return (
-      <div className="dashboard">
-        <header className="header">
-          <h2>HotelPro</h2>
-          <button onClick={handleLogout}>Logout</button>
-        </header>
-
-        <main className="welcome">
-          <h1>Welcome, {user.name}!</h1>
-          <p>You are successfully logged in.</p>
-
-          <div className="dashboard-cards">
-            <div className="card">
-              <h3>Rooms</h3>
-              <p>Manage hotel rooms</p>
-            </div>
-
-            <div className="card">
-              <h3>Bookings</h3>
-              <p>Manage reservations</p>
-            </div>
-
-            <div className="card">
-              <h3>Profile</h3>
-              <p>{user.email}</p>
-            </div>
-          </div>
-        </main>
-      </div>
-    );
-  }
-
-  return (
-    <div className="login-page">
-      <form className="login-card" onSubmit={handleLogin}>
-        <h1>HotelPro</h1>
-        <p className="subtitle">Hotel Management System</p>
-
-        <label>Email</label>
-        <input
-          type="email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-
-        <label>Password</label>
-        <input
-          type="password"
-          placeholder="Enter your password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-
-        {message && <p className="error">{message}</p>}
-
-        <button type="submit" disabled={loading}>
-          {loading ? "Logging in..." : "Login"}
-        </button>
-      </form>
-    </div>
-  );
-}
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+  Use of this source code is governed by an MIT-style
+  license that can be found in the LICENSE file or at
+  https://opensource.org/licenses/MIT.
+*/
+import { addPlugins } from './addPlugins.js';
+import { addRoute } from './addRoute.js';
+import { cleanupOutdatedCaches } from './cleanupOutdatedCaches.js';
+import { createHandlerBoundToURL } from './createHandlerBoundToURL.js';
+import { getCacheKeyForURL } from './getCacheKeyForURL.js';
+import { matchPrecache } from './matchPrecache.js';
+import { precache } from './precache.js';
+import { precacheAndRoute } from './precacheAndRoute.js';
+import { PrecacheController } from './PrecacheController.js';
+import { PrecacheRoute } from './PrecacheRoute.js';
+import { PrecacheStrategy } from './PrecacheStrategy.js';
+import { PrecacheFallbackPlugin } from './PrecacheFallbackPlugin.js';
+import './_version.js';
+/**
+ * Most consumers of this module will want to use the
+ * {@link workbox-precaching.precacheAndRoute}
+ * method to add assets to the cache and respond to network requests with these
+ * cached assets.
+ *
+ * If you require more control over caching and routing, you can use the
+ * {@link workbox-precaching.PrecacheController}
+ * interface.
+ *
+ * @module workbox-precaching
+ */
+export { addPlugins, addRoute, cleanupOutdatedCaches, createHandlerBoundToURL, getCacheKeyForURL, matchPrecache, precache, precacheAndRoute, PrecacheController, PrecacheRoute, PrecacheStrategy, PrecacheFallbackPlugin, };
+export * from './_types.js';

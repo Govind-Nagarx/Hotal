@@ -1,29 +1,29 @@
 {
-  "name": "yallist",
-  "version": "3.1.1",
-  "description": "Yet Another Linked List",
-  "main": "yallist.js",
-  "directories": {
-    "test": "test"
-  },
-  "files": [
-    "yallist.js",
-    "iterator.js"
+  "name": "workbox-precaching",
+  "version": "6.6.0",
+  "license": "MIT",
+  "author": "Google's Web DevRel Team",
+  "description": "This module efficiently precaches assets.",
+  "repository": "googlechrome/workbox",
+  "bugs": "https://github.com/googlechrome/workbox/issues",
+  "homepage": "https://github.com/GoogleChrome/workbox",
+  "keywords": [
+    "workbox",
+    "workboxjs",
+    "service worker",
+    "sw"
   ],
-  "dependencies": {},
-  "devDependencies": {
-    "tap": "^12.1.0"
+  "workbox": {
+    "browserNamespace": "workbox.precaching",
+    "packageType": "sw"
   },
-  "scripts": {
-    "test": "tap test/*.js --100",
-    "preversion": "npm test",
-    "postversion": "npm publish",
-    "postpublish": "git push origin --all; git push origin --tags"
+  "main": "index.js",
+  "module": "index.mjs",
+  "types": "index.d.ts",
+  "dependencies": {
+    "workbox-core": "6.6.0",
+    "workbox-routing": "6.6.0",
+    "workbox-strategies": "6.6.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/isaacs/yallist.git"
-  },
-  "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
-  "license": "ISC"
+  "gitHead": "252644491d9bb5a67518935ede6df530107c9475"
 }
