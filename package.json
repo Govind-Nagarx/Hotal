@@ -1,29 +1,29 @@
 {
-  "name": "hotel-frontend",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "start": "react-scripts start"
+  "name": "yallist",
+  "version": "3.1.1",
+  "description": "Yet Another Linked List",
+  "main": "yallist.js",
+  "directories": {
+    "test": "test"
   },
-  "dependencies": {
-    "axios": "^1.7.9",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-scripts": "5.0.1"
-  },
+  "files": [
+    "yallist.js",
+    "iterator.js"
+  ],
+  "dependencies": {},
   "devDependencies": {
-    "http-server": "^14.1.1"
+    "tap": "^12.1.0"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "scripts": {
+    "test": "tap test/*.js --100",
+    "preversion": "npm test",
+    "postversion": "npm publish",
+    "postpublish": "git push origin --all; git push origin --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isaacs/yallist.git"
+  },
+  "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
+  "license": "ISC"
 }
