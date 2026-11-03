@@ -3,9 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Management System</title>
+    <title>HotelPro - Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .login-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px #0002;
+            width: 320px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2563eb;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            box-sizing: border-box;
+            border-radius: 6px;
+        }
+
+        input {
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
 </head>
 <body>
-    <div id="root"></div>
+
+    <div class="login-box">
+        <h2>HotelPro Login</h2>
+
+        <form id="loginForm">
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+
+        <p id="message"></p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+        const loginForm = document.getElementById("loginForm");
+        const message = document.getElementById("message");
+
+        loginForm.addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            message.textContent = "Logging in...";
+
+            try {
+                const response = await axios.post(
+                    "http://localhost:5000/api/auth/login",
+                    { email, password }
+                );
+
+                message.textContent = response.data.message || "Login successful!";
+                message.style.color = "green";
+                const user = response.data.user;
+
+// User details save karo
+                localStorage.setItem("user", JSON.stringify(user));
+
+// Dashboard par redirect
+                window.location.href = "dashboard.html";
+                console.log("Login response:", response.data);
+
+            } catch (error) {
+                message.textContent =
+                    error.response?.data?.message || "Login failed. Check your details.";
+                message.style.color = "red";
+            }
+        });
+    </script>
+
 </body>
 </html>
