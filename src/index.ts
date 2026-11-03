@@ -6,47 +6,30 @@
   https://opensource.org/licenses/MIT.
 */
 
-import {addPlugins} from './addPlugins.js';
-import {addRoute} from './addRoute.js';
-import {cleanupOutdatedCaches} from './cleanupOutdatedCaches.js';
-import {createHandlerBoundToURL} from './createHandlerBoundToURL.js';
-import {getCacheKeyForURL} from './getCacheKeyForURL.js';
-import {matchPrecache} from './matchPrecache.js';
-import {precache} from './precache.js';
-import {precacheAndRoute} from './precacheAndRoute.js';
-import {PrecacheController} from './PrecacheController.js';
-import {PrecacheRoute} from './PrecacheRoute.js';
-import {PrecacheStrategy} from './PrecacheStrategy.js';
-import {PrecacheFallbackPlugin} from './PrecacheFallbackPlugin.js';
-
+import {registerQuotaErrorCallback} from './registerQuotaErrorCallback.js';
+import * as _private from './_private.js';
+import {cacheNames} from './cacheNames.js';
+import {copyResponse} from './copyResponse.js';
+import {clientsClaim} from './clientsClaim.js';
+import {setCacheNameDetails} from './setCacheNameDetails.js';
+import {skipWaiting} from './skipWaiting.js';
 import './_version.js';
 
 /**
- * Most consumers of this module will want to use the
- * {@link workbox-precaching.precacheAndRoute}
- * method to add assets to the cache and respond to network requests with these
- * cached assets.
+ * All of the Workbox service worker libraries use workbox-core for shared
+ * code as well as setting default values that need to be shared (like cache
+ * names).
  *
- * If you require more control over caching and routing, you can use the
- * {@link workbox-precaching.PrecacheController}
- * interface.
- *
- * @module workbox-precaching
+ * @module workbox-core
  */
-
 export {
-  addPlugins,
-  addRoute,
-  cleanupOutdatedCaches,
-  createHandlerBoundToURL,
-  getCacheKeyForURL,
-  matchPrecache,
-  precache,
-  precacheAndRoute,
-  PrecacheController,
-  PrecacheRoute,
-  PrecacheStrategy,
-  PrecacheFallbackPlugin,
+  _private,
+  cacheNames,
+  clientsClaim,
+  copyResponse,
+  registerQuotaErrorCallback,
+  setCacheNameDetails,
+  skipWaiting,
 };
 
-export * from './_types.js';
+export * from './types.js';
